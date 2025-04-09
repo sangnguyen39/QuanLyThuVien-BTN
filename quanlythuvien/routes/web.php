@@ -2,7 +2,10 @@
 
 use App\Http\Controllers\Admin\BookController;
 use App\Http\Controllers\AdminDashboardController;
+use App\Http\Controllers\Admin\AdminController;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\User\UserController;
+
 
 /*
 |--------------------------------------------------------------------------
@@ -14,18 +17,17 @@ use Illuminate\Support\Facades\Route;
 | contains the "web" middleware group. Now create something great!
 |
 */
-
-Route::get('/', function () {
-    return view('welcome');
-});
+route::get('/register',[UserController::class,'showregister'])->name('auth.register');
+route::post('/register',[UserController::class,'store'] )->name('auth.register.store');
 
 route::group(['prefix'=> 'admin'], function () {
-    Route::get('/',[AdminDashboardController::class, 'index'])->name('admin.index');
+    Route::get('/dashboard',[AdminDashboardController::class, 'index'])->name('admin.index')->middleware('auth');
     route::get('/BookController',[BookController::class,'index'])->name('book.index');
 });
 
-Route::get('/dashboard', function () {
-    return view('dashboard');
-})->middleware(['auth'])->name('dashboard');
+route::get('/login',[UserController::class,'showlogin'])->name('auth.showlogin');
+route::post('/login',[UserController::class,'login'])->name('auth.login');
+route::post('/logout',[UserController::class,'logout'])->name('logout');
 
-require __DIR__.'/auth.php';
+
+//require __DIR__.'/auth.php';

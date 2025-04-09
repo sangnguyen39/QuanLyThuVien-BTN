@@ -1,3 +1,4 @@
+@php use Illuminate\Support\Facades\Auth; @endphp
 <!DOCTYPE html>
 <html lang="vi">
 
@@ -347,9 +348,8 @@
             <li><a href="#"><span class="icon-placeholder">💰</span> <span>Quản lý tài chính</span></a></li>
         </ul>
         <div class="sidebar-bottom">
-            <img src="placeholder_avatar.png" alt="Michael Smith">
-            <p>Michael Smith</p>
-            <p>michael.smith@gmail.com</p>
+            <img src="placeholder_avatar.png" >
+            <p>{{Auth::user()->full_name}}</p>
             <a href="#"><span>Đăng xuất</span></a>
         </div>
     </div>
