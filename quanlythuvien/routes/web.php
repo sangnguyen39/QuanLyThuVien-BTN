@@ -3,6 +3,12 @@
 use App\Http\Controllers\Admin\BookController;
 use App\Http\Controllers\AdminDashboardController;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\UserController;
+use App\Http\Controllers\theloaiController;
+use App\Http\Controllers\AccountController;
+
+
+
 
 /*
 |--------------------------------------------------------------------------
@@ -15,9 +21,9 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-});
+// Route::get('/', function () {
+//     return view('welcome');
+// });
 
 route::group(['prefix'=> 'admin'], function () {
     Route::get('/',[AdminDashboardController::class, 'index'])->name('admin.index');
@@ -29,3 +35,35 @@ Route::get('/dashboard', function () {
 })->middleware(['auth'])->name('dashboard');
 
 require __DIR__.'/auth.php';
+
+// user
+Route::get('/', [UserController::class, 'index']);
+
+Route::get('/theloai/{id}', [theloaiController::class, 'theloai'])->name('theloai');
+Route::get('/tatca-sach', [UserController::class, 'tatCaSach'])->name('books.all');
+
+Route::get('/tatca-sach', [UserController::class, 'tatCaSach'])->name('tatca-sach');
+Route::get('/search', [UserController::class, 'search'])->name('search');
+
+Route::get('/book/{id}', [UserController::class, 'bookDetails'])->name('book.details');
+
+// cập nhật thông tin user
+Route::get('/accountpanel','App\Http\Controllers\AccountController@accountpanel')
+->middleware('auth')->name("account");
+
+Route::post('/saveaccountinfo','App\Http\Controllers\AccountController@saveaccountinfo')
+->middleware('auth')->name('saveinfo');
+Route::post('/book/{id}/borrow', [BookController::class, 'borrow'])->name('book.borrow')->middleware('auth');
+// routes/web.php
+
+Route::post('/book/borrow/{book_id}', [UserController::class, 'borrowBook'])->name('book.borrow');
+/*// Chỉ cho phép người dùng đã đăng nhập truy cập
+Route::middleware('auth')->group(function () {
+    // Lịch sử mượn sách của người dùng
+    Route::get('/user/borrow-history', [UserController::class, 'borrowHistory'])->name('user.borrow.history');
+});*/
+// routes/web.php
+Route::get('/borrow-history','App\Http\Controllers\UserController@borrowHistory')
+    ->middleware('auth')
+    ->name("borrowHistory");
+
