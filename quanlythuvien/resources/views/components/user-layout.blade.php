@@ -1,14 +1,15 @@
 <!DOCTYPE html>
 <html lang="vi">
-
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>BOOKLIBRARY</title>
+    <link rel="stylesheet" href="{{ asset('css/app.css') }}">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+
     
     <style>
-                /* Cho màn hình nhỏ hơn hoặc bằng 768px (ví dụ: tablet) */
-                @media (max-width: 768px) {
+        /* Cho màn hình nhỏ hơn hoặc bằng 768px (ví dụ: tablet) */
+        @media (max-width: 768px) {
             .container {
                 flex-direction: column;
                 /* Chuyển sidebar lên trên main content */
@@ -101,7 +102,7 @@
         }
 
         .sidebar li {
-            padding: 8px 0;
+            padding: 5px 0;
         }
 
         .sidebar li a {
@@ -265,47 +266,107 @@
     }
     
 
+</style>
 
-    </style>
-</head>
+<header>
+    <nav class="navbar navbar-light navbar-expand-sm banner-navbar">
+        <div class="container-fluid">
+            <!-- <div class="col-12">
+                <a class="navbar-brand text-white fw-bold" href="{{ url('/') }}">Thư viện Hub</a>
+            </div> -->
+            <!-- Thay đổi trong phần auth-box -->
+            <div class="auth-box">
+                @auth
+                    <div class="dropdown">
+                        <button type="button" class="btn btn-success dropdown-toggle" data-toggle="dropdown">
+                            {{ Auth::user()->username }}
+                        </button>
+                        <div class="dropdown-menu dropdown-menu-end">
+                            <a class="dropdown-item" href="{{ route('account') }}">Thông tin</a>
+                            <form method="POST" action="{{ route('logout') }}">
+                                @csrf
+                                <a class="dropdown-item" onclick="event.preventDefault(); this.closest('form').submit();">
+                                    Đăng xuất
+                                </a>
+                            </form>
+                        </div>
+                    </div>
+                    
+                @else
+                    <a href="{{ route('auth.showlogin') }}">
+                        <button class="btn btn-sm btn-primary">Đăng nhập</button>
+                    </a>
+                    <a href="{{ route('auth.register') }}">
+                        <button class="btn btn-sm btn-success">Đăng ký</button>
+                    </a>
+                @endauth
+            </div>
 
-<body>
+        </div>
+    </nav>
+</header>
+    
     <div class="container">
+        
         <div class="sidebar">
-            <a href="{{ url('/') }}"><h2>BOOKLIBRARY</h2></a>
-
-            <h4>Thể loại</h4>
-    <ul>
-        @foreach ($categories as $category)
-            <li>
-                <a href="{{ route('theloai', ['id' => $category->category_id]) }}">
-                    {{ $category->category_name }}
-                </a>
-            </li>
-        @endforeach
-        <li><a href="{{ route('tatca-sach') }}" class="see-all">See all</a></li>
-
-    </ul>
+        <a href="{{ url('/') }}"><h4>BOOKLIBRARY</h4></a>
+        <h4>Thể loại</h4>
+            <ul>
+                @foreach ($categories as $category)
+                    <li>
+                        <a href="{{ route('theloai', ['id' => $category->category_id]) }}">
+                            {{ $category->category_name }}
+                        </a>
+                    </li>
+                @endforeach
+                <li><a href="{{ route('tatca-sach') }}" class="see-all">See all category</a></li>
+            </ul>
 
             <div class="readers-list">
-            <h4>Người đọc gần đây</h4>
-    <ul>
-        @foreach ($recentBorrowers as $borrower)
-            <li class="reader-item">
-                <img src="{{ asset('storage/profile/'.$borrower->photo) }}" width="30px" class='mb-1'/>
-                
+                <h5>Người đọc gần đây</h5>
+                <ul>
+                    @foreach ($recentBorrowers as $borrower)
+                        <li class="reader-item">
+                            <!-- <img src="{{ asset('images/' . $borrower->photo) }}" alt="{{ $borrower->username }}"> -->
+                            <img src="{{ asset('storage/profile/'.$borrower->photo) }}" width="30px" class='mb-1'/>
+                            {{ $borrower->username }}   
+                        </li>  
+                    @endforeach
+                   
 
-                {{ $borrower->username }}
-            </li>
-        @endforeach
-        <li><a href="#" class="see-all">See all</a></li>
-    </ul>
+                </ul>
             </div>
         </div>
-        <!-- Main Content -->
-        @yield('main-content')
+
+
+        <!-- Nội dung chính -->
+        <div class="main-content">
+        <div class="header">
+            <div class="search-bar">
+                <form action="{{ route('search') }}" method="GET">
+                    <input type="text" placeholder="Tìm kiếm..." name="search" value="{{ request('search') }}">
+                    <button type="submit"> Tìm kiếm</button>
+                </form>
+            </div>
+            <!-- <div class="user-info">
+                <span>Xin chào: Trần Xuân Vũ</span>
+                <button>Đăng xuất</button>
+            </div> -->
+            <div class="header d-flex justify-content-end">
+            @auth
+                <span class="font-weight-bold">Xin chào ~ {{ Auth::user()->full_name }}</span>
+            @endauth
+                </div>
+        </div>
+                
+
+
+        {{ $slot }}
+       </div>
+
     </div>
-    <footer>
+        
+        <footer>
             <div class='row' style='text-align:center'>
                 <div class='col-4'>GIỚI THIỆU</div>
                 <div class='col-4'>TRỢ GIÚP</div>
@@ -314,6 +375,10 @@
                     email: nguocdongquakhu@gmail.com</div>
             </div>
         </footer>
+         <!-- Bootstrap JS (for dropdown to work) -->
+         <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
+        <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+        
 </body>
-
 </html>

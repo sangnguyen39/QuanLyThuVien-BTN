@@ -23,6 +23,7 @@ use App\Http\Controllers\AccountController;
 | contains the "web" middleware group. Now create something great!
 |
 */
+// đăng ký đăng nhập
 route::get('/register',[UserController::class,'showregister'])->name('auth.register');
 route::post('/register',[UserController::class,'store'] )->name('auth.register.store');
 
@@ -43,10 +44,18 @@ Route::get('/dashboard', function () {
     return view('dashboard');
 })->middleware(['auth'])->name('dashboard');
 
+
+
 // require __DIR__.'/auth.php';
 
-// user
+// phần user
 Route::get('/', [UsersController::class, 'index']);
+
+Route::post('/logout', function () {
+    Auth::logout();
+    return redirect('/'); //  Chuyển về trang chủ khi đăng xuất
+})->name('logout');
+
 
 Route::get('/theloai/{id}', [theloaiController::class, 'theloai'])->name('theloai');
 
