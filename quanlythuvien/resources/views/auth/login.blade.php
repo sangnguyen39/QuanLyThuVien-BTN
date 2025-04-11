@@ -31,6 +31,7 @@
 
             </form>
             <form action="{{route('auth.register')}}"><button type="submit" class="login-button"  style="background-color: rgb(247, 55, 55);">Đăng ký</button></form>
+            <!--  -->
             <br><br>
             <a href="/" style="color:black;">Truy cập thư viện</a><br>
 

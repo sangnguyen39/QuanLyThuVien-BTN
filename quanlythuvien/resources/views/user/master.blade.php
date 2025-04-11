@@ -5,9 +5,10 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>BOOKLIBRARY</title>
+    
     <style>
-        /* Cho màn hình nhỏ hơn hoặc bằng 768px (ví dụ: tablet) */
-        @media (max-width: 768px) {
+                /* Cho màn hình nhỏ hơn hoặc bằng 768px (ví dụ: tablet) */
+                @media (max-width: 768px) {
             .container {
                 flex-direction: column;
                 /* Chuyển sidebar lên trên main content */
@@ -74,7 +75,7 @@
         }
 
         .container {
-            max-width: 1200px;
+            max-width: 1300px;
             margin: 20px auto;
             background-color: #fff;
             padding: 20px;
@@ -126,7 +127,7 @@
         }
 
         .search-bar input[type="text"] {
-            padding: 8px;
+            padding: 5px;
             border: 1px solid #ccc;
             border-radius: 4px;
         }
@@ -155,33 +156,51 @@
             color: #333;
         }
 
+       
         .book-list {
-            /* display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
-            gap: 20px;
-            margin-bottom: 30px; */
-            display:grid;
-            grid-template-columns:repeat(5,20%);
-        }
+    display: grid;
+    grid-template-columns: repeat(5, 1fr); /* 5 cột đều nhau */
+    gap: 15px; /* khoảng cách giữa các sách */
+    margin-bottom: 40px;
+    padding-right: 20px;
 
-        .book-item {
-            text-align: center;
-            margin:10px;
-        
-        }
+}
 
-        .book-item img {
-            max-width: 100%;
-            height: auto;
-            border: 1px solid #ddd;
-            box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.05);
-        }
+.book-item {
+    background-color: #fff;
+    border-radius: 6px;
+    overflow: hidden;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+    transition: transform 0.3s ease;
+    cursor: pointer;
+    display: flex;
+    flex-direction: column;
 
-        .book-item p {
-            margin-top: 5px;
-            font-size: 0.9em;
-            color: #555;
-        }
+    height: 100%;
+    border: 1px solid #eee;
+}
+
+.book-item:hover {
+    transform: translateY(-6px);
+}
+
+.book-item img {
+    width: 100%;
+    height: 240px;
+    object-fit: cover;
+    display: block;
+}
+
+.book-item p {
+    padding: 8px 10px;
+    font-size: 1rem;
+    font-weight: 600;
+    color: #333;
+    text-align: center;
+    flex-grow: 1;
+    margin: 0;
+}
+
 
         .see-all {
             color: #007bff;
@@ -207,6 +226,46 @@
             margin-right: 10px;
             object-fit: cover;
         }
+
+    </style>
+    <style>
+    /* Định dạng màu nền và màu chữ của menu */
+    .navbar {
+        background-color: rgba(240, 238, 245, 0.93);
+        max-width: 1300px;
+        font-weight: bold;
+        margin: 0 auto;
+    }
+
+    .nav-item a {
+        color: #fff !important;
+    }
+
+    
+
+    .banner-navbar {
+        height: 150px;
+        background-image: url('/images/banner.jpg');
+        background-size: cover;
+        background-position: center;
+        color: white;
+        position: relative;
+    }
+
+    /* CSS cho khối login/register/dropdown ở góc dưới bên phải */
+    .auth-box {
+        position: absolute;
+        bottom: 10px;
+        right: 20px;
+    }
+
+    .auth-box button {
+        margin-left: 5px;
+        background-color: rgba(14, 1, 1, 0.9);
+    }
+    
+
+
     </style>
 </head>
 
@@ -215,7 +274,7 @@
         <div class="sidebar">
             <a href="{{ url('/') }}"><h2>BOOKLIBRARY</h2></a>
 
-            <h3>Thể loại</h3>
+            <h4>Thể loại</h4>
     <ul>
         @foreach ($categories as $category)
             <li>
@@ -229,7 +288,7 @@
     </ul>
 
             <div class="readers-list">
-            <h3>Người đọc gần đây</h3>
+            <h4>Người đọc gần đây</h4>
     <ul>
         @foreach ($recentBorrowers as $borrower)
             <li class="reader-item">
@@ -248,9 +307,11 @@
     </div>
     <footer>
             <div class='row' style='text-align:center'>
-                <div class='col-4'>TRỤ SỞ</div>
+                <div class='col-4'>GIỚI THIỆU</div>
                 <div class='col-4'>TRỢ GIÚP</div>
-                <div class='col-4'>SDT LIÊN HỆ: 0326064422</div>
+                <div class='col-4' style='text-align:left'>LIÊN HỆ: <br>
+                    Số điện thoại: 0326064422<br>
+                    email: nguocdongquakhu@gmail.com</div>
             </div>
         </footer>
 </body>
