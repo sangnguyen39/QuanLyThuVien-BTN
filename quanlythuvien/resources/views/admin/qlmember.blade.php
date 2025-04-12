@@ -23,7 +23,7 @@
             <th>Mã sinh viên</th>
             <th>Email</th>
             <th>Lớp </th>
-            <th>Khóa</th>
+            <th>Khóa học</th>
             <th style="text-align: center">Thao tác</th>
         </tr>
     </thead>
