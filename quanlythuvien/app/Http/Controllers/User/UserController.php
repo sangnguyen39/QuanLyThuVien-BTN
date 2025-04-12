@@ -12,6 +12,11 @@ use Illuminate\Support\Facades\DB;
 
 class UserController extends Controller
 {
+    public function index()
+{
+    return view('user.index'); // hoặc trả về dữ liệu khác tùy ý
+}
+
     public function showlogin()
     {
         // Logic cho việc đăng nhập (nếu cần)

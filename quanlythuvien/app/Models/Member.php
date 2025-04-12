@@ -16,6 +16,7 @@ class Member extends Authenticatable implements AuthenticatableContract, CanRese
     use HasFactory, Notifiable;
 
     protected $table = 'members';
+    protected $primaryKey = 'member_id';
     protected $fillable = [
         'student_id',
         'full_name',
