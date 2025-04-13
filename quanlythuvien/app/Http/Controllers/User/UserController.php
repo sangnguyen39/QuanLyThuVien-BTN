@@ -12,11 +12,15 @@ use Illuminate\Support\Facades\DB;
 
 class UserController extends Controller
 {
+<<<<<<< HEAD
     public function index()
 {
     return view('user.index'); // hoặc trả về dữ liệu khác tùy ý
 }
 
+=======
+    
+>>>>>>> Giao-Dien-User
     public function showlogin()
     {
         // Logic cho việc đăng nhập (nếu cần)
@@ -31,6 +35,7 @@ class UserController extends Controller
                 return redirect()->back()->withErrors($validator)->withInput();
                 }
                 $remember = $request->has('remember');
+<<<<<<< HEAD
                 if(Auth::attempt(['username' => $request->username,'password' => $request->password],$remember)){
                     if(auth::user()->role=='admin'){
                         return redirect()->route('admin.index');
@@ -40,6 +45,37 @@ class UserController extends Controller
                     }
                 }
                 return redirect()->back()->with('error', 'Invalid credentials');
+=======
+                // if(Auth::attempt(['username' => $request->username,'password' => $request->password],$remember)){
+                //     if(auth::user()->role=='admin'){
+                //         return redirect()->route('admin.index');
+                //     }
+                //     if(auth::user()->role=='student'){
+                //         return redirect()->route('user.index');
+                //     }
+                // }
+                if (Auth::attempt(['username' => $request->username, 'password' => $request->password], $remember)) {
+                    $user = Auth::user();
+                    if ($user->role === 'admin') {
+                        return redirect()->route('admin.index'); 
+                    } elseif ($user->role === 'student') {
+                        return redirect('/'); //
+                    }
+                }
+                if (Auth::attempt(['username' => $request->username, 'password' => $request->password], $remember)) {
+    $user = Auth::user();
+    if ($user->role === 'admin') {
+        return redirect()->route('admin.index'); 
+    } elseif ($user->role === 'student') {
+        return redirect('/'); // về trang chủ dành cho học sinh
+    }
+}
+
+                
+                
+                return redirect()->back()->with('error', 'Invalid credentials');
+                
+>>>>>>> Giao-Dien-User
     }
 
 

@@ -28,8 +28,18 @@
                     <label for="remember">Ghi nhớ đăng nhập lần sau</label>
                 </div>
                 <button type="submit" class="login-button">Đăng nhập</button> <br> <br> 
+<<<<<<< HEAD
             </form>
             <form action="{{route('auth.register')}}"><button type="submit" class="login-button"  style="background-color: rgb(247, 55, 55);">Đăng ký</button></form>
+=======
+
+            </form>
+            <form action="{{route('auth.register')}}"><button type="submit" class="login-button"  style="background-color: rgb(247, 55, 55);">Đăng ký</button></form>
+            <!--  -->
+            <br><br>
+            <a href="/" style="color:black;">Truy cập thư viện</a><br>
+
+>>>>>>> Giao-Dien-User
         </div>
     </div>
 </body>
