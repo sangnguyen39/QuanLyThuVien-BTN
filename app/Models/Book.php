@@ -8,6 +8,7 @@ use Illuminate\Database\Eloquent\Model;
 class Book extends Model
 {
     use HasFactory;
+
     protected $table = 'book';
     
     protected $primaryKey = 'book_id';
@@ -23,7 +24,4 @@ class Book extends Model
         'file_anh_bia',
         'mo_ta'
     ];
-
-
-
 }

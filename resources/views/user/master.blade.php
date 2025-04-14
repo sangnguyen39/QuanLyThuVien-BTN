@@ -158,31 +158,15 @@
 
        
         .book-list {
-    display: grid;
-    grid-template-columns: repeat(5, 1fr); /* 5 cột đều nhau */
-    gap: 15px; /* khoảng cách giữa các sách */
-    margin-bottom: 40px;
-    padding-right: 20px;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+            gap: 20px;
+            margin-bottom: 30px;
+        }
 
-}
-
-.book-item {
-    background-color: #fff;
-    border-radius: 6px;
-    overflow: hidden;
-    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
-    transition: transform 0.3s ease;
-    cursor: pointer;
-    display: flex;
-    flex-direction: column;
-
-    height: 100%;
-    border: 1px solid #eee;
-}
-
-.book-item:hover {
-    transform: translateY(-6px);
-}
+        .book-item {
+            text-align: center;
+        }
 
 .book-item img {
     width: 100%;
@@ -272,48 +256,42 @@
 <body>
     <div class="container">
         <div class="sidebar">
-            <a href="{{ url('/') }}"><h2>BOOKLIBRARY</h2></a>
-
-            <h4>Thể loại</h4>
-    <ul>
-        @foreach ($categories as $category)
-            <li>
-                <a href="{{ route('theloai', ['id' => $category->category_id]) }}">
-                    {{ $category->category_name }}
-                </a>
-            </li>
-        @endforeach
-        <li><a href="{{ route('tatca-sach') }}" class="see-all">See all</a></li>
-
-    </ul>
+            <h2>BOOKLIBRARY</h2>
+            <h3>Thể loại</h3>
+            <ul>
+                <li><a href="#">Văn học</a></li>
+                <li><a href="#">Khoa học và công nghệ</a></li>
+                <li><a href="#">Khoa học xã hội và nhân văn</a></li>
+                <li><a href="#">Giáo dục</a></li>
+                <li><a href="#">Kinh tế kinh doanh</a></li>
+                <li><a href="#">Nghệ thuật và thiết kế</a></li>
+                <li><a href="#">Kỹ thuật và công nghệ thông tin</a></li>
+                <li><a href="#">Ngoại ngữ và Ngôn ngữ học</a></li>
+                <li><a href="#">Nông nghiệp và môi trường</a></li>
+                <li><a href="#">Y học và chăm sóc sức khỏe</a></li>
+                <li><a href="#" class="see-all">See all</a></li>
+            </ul>
 
             <div class="readers-list">
-            <h4>Người đọc gần đây</h4>
-    <ul>
-        @foreach ($recentBorrowers as $borrower)
-            <li class="reader-item">
-                <img src="{{ asset('storage/profile/'.$borrower->photo) }}" width="30px" class='mb-1'/>
-                
-
-                {{ $borrower->username }}
-            </li>
-        @endforeach
-        <li><a href="#" class="see-all">See all</a></li>
-    </ul>
+                <h3>Người đọc gần đây</h3>
+                <ul>
+                    <li class="reader-item"><img src="https://via.placeholder.com/30/007bff/FFFFFF?Text=PS"
+                            alt="Phú Sang"> Phú Sang</li>
+                    <li class="reader-item"><img src="https://via.placeholder.com/30/28a745/FFFFFF?Text=TT"
+                            alt="Thu Thảo"> Thu Thảo</li>
+                    <li class="reader-item"><img src="https://via.placeholder.com/30/dc3545/FFFFFF?Text=XV"
+                            alt="Xuân Vũ"> Xuân Vũ</li>
+                    <li class="reader-item"><img src="https://via.placeholder.com/30/ffc107/000000?Text=HĐ"
+                            alt="Hoài Duyên"> Hoài Duyên</li>
+                    <li class="reader-item"><img src="https://via.placeholder.com/30/17a2b8/FFFFFF?Text=MU"
+                            alt="Mỹ Uyên"> Mỹ Uyên</li>
+                    <li><a href="#" class="see-all">See all</a></li>
+                </ul>
             </div>
         </div>
         <!-- Main Content -->
         @yield('main-content')
     </div>
-    <footer>
-            <div class='row' style='text-align:center'>
-                <div class='col-4'>GIỚI THIỆU</div>
-                <div class='col-4'>TRỢ GIÚP</div>
-                <div class='col-4' style='text-align:left'>LIÊN HỆ: <br>
-                    Số điện thoại: 0326064422<br>
-                    email: nguocdongquakhu@gmail.com</div>
-            </div>
-        </footer>
 </body>
 
 </html>

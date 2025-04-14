@@ -1,0 +1,58 @@
+<?php
+
+namespace App\View\Components;
+
+use Illuminate\View\Component;
+<<<<<<< HEAD:app/View/Components/UserLayout.php
+use App\Models\ThuVien; // ✅ Đã thêm dòng này
+
+class UserLayout extends Component
+{
+    public $categories;
+    public $recentBorrowers;
+    public $danhSachThuVien;
+=======
+use Illuminate\Support\Facades\DB;
+
+
+class UserLayout extends Component
+{
+    
+    /**
+     * Create a new component instance.
+     *
+     * @return void
+     */
+    public $categories;
+    public $recentBorrowers;
+>>>>>>> kienphu:quanlythuvien/app/View/Components/UserLayout.php
+
+    public function __construct($categories, $recentBorrowers)
+    {
+        $this->categories = $categories;
+        $this->recentBorrowers = $recentBorrowers;
+<<<<<<< HEAD:app/View/Components/UserLayout.php
+        $this->danhSachThuVien = ThuVien::all(); // 🟢 Không còn lỗi
+    }
+
+=======
+    }
+    
+    /**
+     * Get the view / contents that represent the component.
+     *
+     * @return \Illuminate\Contracts\View\View|\Closure|string
+     */
+>>>>>>> kienphu:quanlythuvien/app/View/Components/UserLayout.php
+    public function render()
+    {
+        return view('components.user-layout');
+    }
+<<<<<<< HEAD:app/View/Components/UserLayout.php
+=======
+
+
+
+
+>>>>>>> kienphu:quanlythuvien/app/View/Components/UserLayout.php
+}
