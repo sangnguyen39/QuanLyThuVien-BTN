@@ -10,6 +10,11 @@ use App\Http\Controllers\UsersController;
 use App\Http\Controllers\theloaiController;
 use App\Http\Controllers\AccountController;
 use App\Http\Controllers\Admin\BorrowTicketController;
+use App\Models\Borrow;
+use App\Http\Controllers\muonsachController;
+
+
+
 
 /*
 |--------------------------------------------------------------------------
@@ -74,3 +79,10 @@ Route::get('/huong-dan', function () {
 Route::get('/dashboard', function () {
     return view('dashboard');
 })->middleware(['auth'])->name('dashboard');
+
+//
+Route::post('/book/borrow/{book_id}', [muonsachController::class, 'borrowBook'])->name('book.borrow');
+
+Route::get('/borrow-history','App\Http\Controllers\muonsachController@borrowHistory')
+    ->middleware('auth')
+    ->name("borrowHistory");
