@@ -59,6 +59,7 @@ Route::get('/theloai/{id}', [theloaiController::class, 'theloai'])->name('theloa
 Route::get('/tatca-sach', [UsersController::class, 'tatCaSach'])->name('tatca-sach');
 Route::get('/search', [UsersController::class, 'search'])->name('search');
 Route::get('/book/{id}', [UsersController::class, 'bookDetails'])->name('book.details');
+route::post('/book/{id}/borrow',[UserController::class,'']);
 
 // Account routes
 Route::get('/accountpanel','App\Http\Controllers\AccountController@accountpanel')
